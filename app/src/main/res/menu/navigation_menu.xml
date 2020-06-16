@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuHome"
+        android:icon="@drawable/ic_outline_home_24"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/menuAllsongs"
+        android:icon="@drawable/ic_all_songs"
+        android:title="All songs" />
+
+    <item
+        android:id="@+id/menuAlbum"
+        android:icon="@drawable/ic_album"
+        android:title="Albums" />
+
+    <item
+        android:id="@+id/menuArtist"
+        android:icon="@drawable/ic_album"
+        android:title="Albums" />
+
+    <item
+        android:id="@+id/menuPlaylist"
+        android:icon="@drawable/ic_playlist"
+        android:title="Playlists" />
+
+    <item
+        android:id="@+id/menuNowPlaying"
+        android:icon="@drawable/ic_play"
+        android:title="Now Playing" />
+
+    <item
+        android:id="@+id/menuSettings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
+
+    <item android:title="Developer's Contact">
+        <menu>
+            <item
+                android:id="@+id/menuTwitter"
+                android:icon="@drawable/ic_album"
+                android:title="Twitter" />
+
+            <item
+                android:id="@+id/menuInstagram"
+                android:icon="@drawable/ic_album"
+                android:title="Instagram" />
+
+            <item
+                android:id="@+id/menuTG"
+                android:icon="@drawable/ic_album"
+                android:title="Telegram" />
+
+            <item
+                android:id="@+id/menuReddit"
+                android:icon="@drawable/ic_album"
+                android:title="Reddit" />
+        </menu>
+    </item>
+
+</menu>
