@@ -9,15 +9,10 @@
         android:id="@+id/menuAllsongs"
         android:name="com.example.musicplayer.AllSongs"
         android:label="all_songs"
-        tools:layout="@layout/fragment_all_songs" />
+        tools:layout="@layout/fragment_all_songs_tab" />
     <fragment
         android:id="@+id/menuHome"
         android:name="com.example.musicplayer.Home"
         android:label="home"
         tools:layout="@layout/fragment_home" />
-    <activity
-        android:id="@+id/menuNowPlaying"
-        android:name="com.example.musicplayer.NowPlaying"
-        android:label="activity_now_playing"
-        tools:layout="@layout/activity_now_playing" />
 </navigation>

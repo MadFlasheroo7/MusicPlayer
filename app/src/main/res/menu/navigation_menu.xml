@@ -18,7 +18,7 @@
     <item
         android:id="@+id/menuArtist"
         android:icon="@drawable/ic_album"
-        android:title="Albums" />
+        android:title="Albu" />
 
     <item
         android:id="@+id/menuPlaylist"

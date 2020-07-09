@@ -1,6 +1,9 @@
 package com.example.musicplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,6 +18,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,6 +45,7 @@ public class NowPlaying extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_now_playing);
+
 
         play_pause_btn = findViewById(R.id.play_pause_Btn);
         previousBtn = findViewById(R.id.previousBtn);
