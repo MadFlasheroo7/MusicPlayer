@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/audio_item">
 
-    <ImageView
-      android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/music_art"
-        android:background="@color/colorBlack"
-        android:padding="5dp"
-        />
-    <TextView
-        android:id="@+id/music_File_Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="file name"
-        android:layout_toEndOf="@+id/music_art"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/colorBlack"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
 
-</LinearLayout>
+
+        <ImageView
+            android:id="@+id/music_art"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/music_File_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/music_art"
+            android:text="file name"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/music_art"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

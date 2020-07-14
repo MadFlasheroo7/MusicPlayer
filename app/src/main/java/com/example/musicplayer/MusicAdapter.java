@@ -1,6 +1,8 @@
 package com.example.musicplayer;
 
 import android.content.Context;
+import android.media.MediaMetadataRetriever;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,13 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.file_Name.setText(mFiles.get(position).getTitle());
+        byte[] image = albumArt(mFiles.get(position).getPath());
+        if (image != null)
+        {
+            Glide.with(mContext).asBitmap().load(image).into(holder.album_Art);
+        }else {
+            Glide.with(mContext).load(R.drawable.ic_album).into(holder.album_Art);
+        }
     }
 
     @Override
@@ -42,7 +53,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     public static class MyViewHolder extends RecyclerView.ViewHolder
     {
-
         TextView file_Name;
         ImageView album_Art;
         public MyViewHolder(@NonNull View itemView) {
@@ -50,5 +60,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             file_Name = itemView.findViewById(R.id.music_File_Name);
             album_Art = itemView.findViewById(R.id.music_art);
         }
+    }
+
+    private byte[] albumArt(String uri)
+    {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(uri);
+        byte[] art = retriever.getEmbeddedPicture();
+        retriever.release();
+        return art;
     }
 }

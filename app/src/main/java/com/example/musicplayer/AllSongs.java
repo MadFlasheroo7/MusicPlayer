@@ -26,16 +26,15 @@ public class AllSongs extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_songs_tab, container, false);
-        musicFiles = new ArrayList<>();
+//        musicFiles = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-        if (!(musicFiles.size() < 1))
-        {
-            musicAdapter = new MusicAdapter(getContext(),musicFiles);
+//        if (!(musicFiles.size() < 1)) {
+            musicAdapter = new MusicAdapter(getContext(), musicFiles);
             recyclerView.setAdapter(musicAdapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
-            musicAdapter.notifyDataSetChanged();
-        }
-        return view;
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+//        musicAdapter.notifyDataSetChanged();
+//        }
+            return view;
     }
 }
