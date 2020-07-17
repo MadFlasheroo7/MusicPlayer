@@ -33,7 +33,7 @@ public class NowPlaying extends AppCompatActivity {
     TextView trackTitle,trackDuration1,trackDuration2;
     SeekBar seek_Track,seek_Vol;
 
-    String songname;
+    String songname,edited;
     static MediaPlayer mediaPlayer;
     int position;
 
