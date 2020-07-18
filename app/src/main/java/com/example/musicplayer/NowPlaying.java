@@ -57,6 +57,7 @@ public class NowPlaying extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (mediaPlayer != null && fromUser){
                     mediaPlayer.seekTo(progress * 1000);
+//                    duration_played.setText(formattedTime(progress));
                 }
             }
 
@@ -77,6 +78,8 @@ public class NowPlaying extends AppCompatActivity {
                     int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
                     track_seek.setProgress(currentPosition);
                     duration_played.setText(formattedTime(currentPosition));
+
+//                    duration_total.setText(formattedTime(mediaPlayer.getDuration()));
                 }
                 handler.postDelayed(this,1000);
             }
@@ -85,7 +88,7 @@ public class NowPlaying extends AppCompatActivity {
 
     private String formattedTime(int currentPosition) {
         String totalOut = "", totalNew = "";
-        String seconds = String.valueOf(currentPosition % 60);
+        String seconds = String.valueOf(currentPosition % 60) ;
         String minutes = String.valueOf(currentPosition / 60);
         totalOut = minutes + ":" + seconds;
         totalNew = minutes + ":" + "0" + seconds;
@@ -94,6 +97,28 @@ public class NowPlaying extends AppCompatActivity {
         }else {
             return totalOut;
         }
+//        String finalTimerString = "";
+//        String secondsString;
+//
+//        //Converting total duration into time
+//        int hours = (int) (currentPosition / 3600000);
+//        int minutes = (int) (currentPosition % 3600000) / 60000;
+//        int seconds = (int) ((currentPosition % 3600000) % 60000 / 1000);
+
+//        // Adding hours if any
+//        if (hours > 0)
+//            finalTimerString = hours + ":";
+//
+//        // Prepending 0 to seconds if it is one digit
+//        if (seconds < 10)
+//            secondsString = "0" + seconds;
+//        else
+//            secondsString = "" + seconds;
+//
+//        finalTimerString = finalTimerString + minutes + ":" + secondsString;
+//
+//        // Return timer String;
+//        return finalTimerString;
     }
 
     private void getIntentMethod() {
@@ -113,7 +138,7 @@ public class NowPlaying extends AppCompatActivity {
             mediaPlayer.start();
         }
         track_seek.setMax(mediaPlayer.getDuration() / 1000);
-        metaData(uri);
+//        metaData(uri);
     }
 
     private void initViews() {
@@ -136,11 +161,11 @@ public class NowPlaying extends AppCompatActivity {
         seek_vol = findViewById(R.id.seek_Vol);
     }
 
-    private void metaData(Uri uri){
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(uri.toString());
-        int durationTotal = Integer.parseInt(listSongs.get(position).getDuration()) / 1000;
-        duration_total.setText(formattedTime(durationTotal));
+//    private void metaData(Uri uri){
+//        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+//        retriever.setDataSource(uri.toString());
+//        int durationTotal = Integer.parseInt(listSongs.get(position).getDuration()) / 1000;
+//        duration_total.setText(formattedTime(durationTotal));
 //        byte[] albumArt = retriever.getEmbeddedPicture();
 //        if (albumArt != null){
 //            Glide.with(this)
@@ -153,5 +178,5 @@ public class NowPlaying extends AppCompatActivity {
 //                    .load(R.drawable.ic_album)
 //                    .into(cover_art);
 //        }
-    }
+//    }
 }
