@@ -36,6 +36,8 @@ public class NowPlaying extends AppCompatActivity {
     ImageView cover_art, vol_up, vol_down;
     SeekBar track_seek, seek_vol;
     static ArrayList<MusicFiles> listSongs = new ArrayList<>();
+    static Uri uri;
+    static MediaPlayer mediaPlayer;
     int position = -1;
 
     @Override
@@ -44,12 +46,53 @@ public class NowPlaying extends AppCompatActivity {
         setContentView(R.layout.activity_now_playing);
         initViews();
         getIntentMethod();
+        track_seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (mediaPlayer != null && fromUser){
+                    mediaPlayer.seekTo(progress * 1000);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        NowPlaying.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null){
+                    int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                    track_seek.setProgress(currentPosition);
+                    duration_played.setText(formattedTime(currentPosition));
+                }
+            }
+        });
     }
 
     private void getIntentMethod() {
         position = getIntent().getIntExtra("Position",-1);
         listSongs = musicFiles;
-
+        if (listSongs != null){
+            playPauseBtn.setImageResource(R.drawable.ic_pause_btn);
+            uri = Uri.parse(listSongs.get(position).getPath());
+        }
+        if (mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
+            mediaPlayer.start();
+        }else {
+            mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
+            mediaPlayer.start();
+        }
+        track_seek.setMax(mediaPlayer.getDuration() / 1000);
     }
 
     private void initViews() {
