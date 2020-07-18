@@ -27,20 +27,31 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.example.musicplayer.MainActivity.musicFiles;
+
 public class NowPlaying extends AppCompatActivity {
 
     TextView song_name, artist_name, duration_played, duration_total;
     ImageButton nxtBtn, prevBtn, playPauseBtn, repeatBtn, shuffleBtn;
     ImageView cover_art, vol_up, vol_down;
     SeekBar track_seek, seek_vol;
+    static ArrayList<MusicFiles> listSongs = new ArrayList<>();
+    int position = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_now_playing);
         initViews();
+        getIntentMethod();
     }
-    
+
+    private void getIntentMethod() {
+        position = getIntent().getIntExtra("Position",-1);
+        listSongs = musicFiles;
+
+    }
+
     private void initViews() {
         song_name = findViewById(R.id.titleTrack);
         artist_name = findViewById(R.id.song_artist);
