@@ -40,7 +40,6 @@ public class NowPlaying extends AppCompatActivity {
         setContentView(R.layout.activity_now_playing);
         initViews();
     }
-
     private void initViews() {
         song_name = findViewById(R.id.titleTrack);
         artist_name = findViewById(R.id.song_artist);
