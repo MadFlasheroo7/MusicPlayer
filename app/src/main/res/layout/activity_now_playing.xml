@@ -7,12 +7,12 @@
     tools:context=".NowPlaying">
 
     <TextView
-        android:id="@+id/trackDuration2"
+        android:id="@+id/trackDuration_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="356dp"
-        android:layout_marginTop="36dp"
-        android:text="00:00"
+        android:layout_marginTop="52dp"
+        android:text="4:00"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,20 +22,23 @@
         android:id="@+id/coverArt"
         android:layout_width="392dp"
         android:layout_height="367dp"
+        android:layout_marginTop="36dp"
         android:foregroundTintMode="src_over"
         android:tint="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_album" />
+        app:srcCompat="@drawable/ic_album"
+        android:contentDescription="Cover Art of music played" />
 
     <TextView
-        android:id="@+id/trackDuration1"
+        android:id="@+id/trackDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="00:00"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="52dp"
+        android:text="1:00"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,16 +46,17 @@
 
     <TextView
         android:id="@+id/titleTrack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:layout_marginTop="32dp"
         android:text="Track Title"
+        android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textColorHint="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coverArt" />
 
@@ -60,62 +64,58 @@
         android:id="@+id/seek_Track"
         android:layout_width="324dp"
         android:layout_height="17dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toStartOf="@+id/trackDuration2"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toStartOf="@+id/trackDuration_total"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/trackDuration1"
+        app:layout_constraintStart_toEndOf="@+id/trackDuration"
         app:layout_constraintTop_toBottomOf="@+id/titleTrack" />
-
-    <ImageView
-        android:id="@+id/volDown"
-        android:layout_width="33dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trackDuration1"
-        app:srcCompat="@drawable/ic_volume_down"
-        android:tint="@color/colorBlack"/>
-
-    <ImageView
-        android:id="@+id/volUp"
-        android:layout_width="33dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trackDuration2"
-        app:srcCompat="@drawable/ic_volume_up"
-        android:tint="@color/colorBlack"/>
 
     <SeekBar
         android:id="@+id/seek_Vol"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="326dp"
         android:layout_height="29dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:max="10"
         android:progress="3"
         app:layout_constraintEnd_toStartOf="@+id/volUp"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/volDown"
         app:layout_constraintTop_toBottomOf="@+id/seek_Track" />
 
     <ImageButton
-        android:id="@+id/nxtBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="96dp"
+        android:id="@+id/shuffleBtn"
+        android:layout_width="37dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/allbtns"
+        android:tint="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toEndOf="@+id/nxtBtn"
+        app:layout_constraintTop_toBottomOf="@+id/volUp"
+        app:srcCompat="@drawable/ic_shuffle_btn2" />
+
+    <ImageButton
+        android:id="@+id/play_pause_Btn"
+        android:layout_width="80dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/allbtns"
+        app:layout_constraintEnd_toStartOf="@+id/nxtBtn"
+        app:layout_constraintHorizontal_bias="0.333"
+        android:clickable="true"
+        app:layout_constraintStart_toEndOf="@+id/previousBtn"
         app:layout_constraintTop_toBottomOf="@+id/seek_Vol"
-        app:srcCompat="@drawable/ic_forward" />
+        app:srcCompat="@drawable/ic_pause_btn"
+        android:focusable="true" />
 
     <ImageButton
         android:id="@+id/previousBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/allbtns"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seek_Vol"
@@ -125,37 +125,56 @@
         android:id="@+id/repeatBtn"
         android:layout_width="34dp"
         android:layout_height="35dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/allbtns"
         android:tint="@color/colorBlack"
         app:layout_constraintEnd_toStartOf="@+id/previousBtn"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seek_Vol"
         app:srcCompat="@drawable/ic_repeat" />
 
-    <ImageButton
-        android:id="@+id/shuffleBtn"
-        android:layout_width="37dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/allbtns"
+    <ImageView
+        android:id="@+id/volDown"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:tint="@color/colorBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trackDuration"
+        app:srcCompat="@drawable/ic_volume_down" />
+
+    <ImageView
+        android:id="@+id/volUp"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
         android:tint="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/nxtBtn"
-        app:layout_constraintTop_toBottomOf="@+id/volUp"
-        app:srcCompat="@drawable/ic_shuffle_btn2" />
+        app:layout_constraintTop_toBottomOf="@+id/trackDuration_total"
+        app:srcCompat="@drawable/ic_volume_up" />
 
     <ImageButton
-        android:id="@+id/play_pause_Btn"
-        android:layout_width="80dp"
-        android:layout_height="79dp"
-        android:layout_marginTop="36dp"
+        android:id="@+id/nxtBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="96dp"
         android:background="@drawable/allbtns"
-        android:onClick="play_pause_btn"
-        app:layout_constraintEnd_toStartOf="@+id/nxtBtn"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/previousBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seek_Vol"
-        app:srcCompat="@drawable/ic_pause_btn" />
+        app:srcCompat="@drawable/ic_forward" />
+
+    <TextView
+        android:id="@+id/song_artist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAlignment="center"
+        android:text="Artist"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTrack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

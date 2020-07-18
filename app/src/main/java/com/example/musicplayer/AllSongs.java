@@ -33,7 +33,7 @@ public class AllSongs extends Fragment {
             musicAdapter = new MusicAdapter(getContext(), musicFiles);
             recyclerView.setAdapter(musicAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-//        musicAdapter.notifyDataSetChanged();
+        musicAdapter.notifyDataSetChanged();
 //        }
             return view;
     }

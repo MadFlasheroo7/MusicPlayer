@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setItemIconTintList(null);
 
         NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome).build();
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome,R.id.menuNowPlaying).build();
 //        NavigationUI.setupActionBarWithNavController(this,navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
                 MusicFiles musicFiles = new MusicFiles(path,title,artist,duration,album);
                 Log.e("Path : " + path,"Album : " + album);
-                Log.e("Title : " + title,"duration : " + duration);
+                Log.e("Title : " + title,"Artist : " + artist);
                 tempAudioList.add(musicFiles);
             }
             cursor.close();

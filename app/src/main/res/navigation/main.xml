@@ -15,4 +15,9 @@
         android:name="com.example.musicplayer.Home"
         android:label="home"
         tools:layout="@layout/fragment_home" />
+    <activity
+        android:id="@+id/menuNowPlaying"
+        android:name="com.example.musicplayer.NowPlaying"
+        android:label="activity_now_playing"
+        tools:layout="@layout/activity_now_playing" />
 </navigation>
