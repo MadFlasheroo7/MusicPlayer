@@ -76,6 +76,19 @@ public class NowPlaying extends AppCompatActivity {
         });
     }
 
+    private String formattedTime(int currentPosition) {
+        String totalOut = "", totalNew = "";
+        String seconds = String.valueOf(currentPosition % 60);
+        String minutes = String.valueOf(currentPosition / 60);
+        totalOut = minutes + ":" + seconds;
+        totalNew = minutes + ":" + "0" + seconds;
+        if (seconds.length() == 1){
+            return totalNew;
+        }else {
+            return totalOut;
+        }
+    }
+
     private void getIntentMethod() {
         position = getIntent().getIntExtra("Position",-1);
         listSongs = musicFiles;
