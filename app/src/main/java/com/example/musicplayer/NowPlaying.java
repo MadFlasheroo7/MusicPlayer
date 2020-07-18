@@ -10,9 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.Image;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
@@ -38,6 +41,7 @@ public class NowPlaying extends AppCompatActivity {
     static ArrayList<MusicFiles> listSongs = new ArrayList<>();
     static Uri uri;
     static MediaPlayer mediaPlayer;
+    private Handler handler = new Handler();
     int position = -1;
 
     @Override
@@ -46,6 +50,8 @@ public class NowPlaying extends AppCompatActivity {
         setContentView(R.layout.activity_now_playing);
         initViews();
         getIntentMethod();
+        song_name.setText(listSongs.get(position).getTitle());
+        artist_name.setText(listSongs.get(position).getArtist());
         track_seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -72,6 +78,7 @@ public class NowPlaying extends AppCompatActivity {
                     track_seek.setProgress(currentPosition);
                     duration_played.setText(formattedTime(currentPosition));
                 }
+                handler.postDelayed(this,1000);
             }
         });
     }
@@ -106,6 +113,7 @@ public class NowPlaying extends AppCompatActivity {
             mediaPlayer.start();
         }
         track_seek.setMax(mediaPlayer.getDuration() / 1000);
+        metaData(uri);
     }
 
     private void initViews() {
@@ -128,4 +136,22 @@ public class NowPlaying extends AppCompatActivity {
         seek_vol = findViewById(R.id.seek_Vol);
     }
 
+    private void metaData(Uri uri){
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(uri.toString());
+        int durationTotal = Integer.parseInt(listSongs.get(position).getDuration()) / 1000;
+        duration_total.setText(formattedTime(durationTotal));
+//        byte[] albumArt = retriever.getEmbeddedPicture();
+//        if (albumArt != null){
+//            Glide.with(this)
+//                    .asBitmap()
+//                    .load(albumArt)
+//                    .into(cover_art);
+//        }else {
+//            Glide.with(this)
+//                    .asBitmap()
+//                    .load(R.drawable.ic_album)
+//                    .into(cover_art);
+//        }
+    }
 }
