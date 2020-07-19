@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
@@ -42,6 +43,7 @@ public class NowPlaying extends AppCompatActivity {
     static Uri uri;
     static MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
+    private Thread playThread, prevThread, nxtThread;
     int position = -1;
 
     @Override
@@ -55,9 +57,9 @@ public class NowPlaying extends AppCompatActivity {
         track_seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (mediaPlayer != null && fromUser){
+                if (mediaPlayer != null && fromUser)
+                {
                     mediaPlayer.seekTo(progress * 1000);
-//                    duration_played.setText(formattedTime(progress));
                 }
             }
 
@@ -78,7 +80,6 @@ public class NowPlaying extends AppCompatActivity {
                     int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
                     track_seek.setProgress(currentPosition);
                     duration_played.setText(formattedTime(currentPosition));
-
 //                    duration_total.setText(formattedTime(mediaPlayer.getDuration()));
                 }
                 handler.postDelayed(this,1000);
@@ -86,8 +87,76 @@ public class NowPlaying extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        playThreadBtn();
+        nxtThreadBtn();
+        prevThreadBtn();
+        super.onResume();
+    }
+
+    private void playThreadBtn() {
+        playThread = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                playPauseBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        playPauseBtnClicked();
+                    }
+                });
+            }
+        };
+        playThread.start();
+    }
+
+    private void playPauseBtnClicked()
+    {
+        if (mediaPlayer.isPlaying())
+        {
+            playPauseBtn.setImageResource(R.drawable.ic_play_btn);
+            mediaPlayer.pause();
+            track_seek.setMax(mediaPlayer.getDuration() / 1000);
+            Toast.makeText(this,"Pausing your Music....",Toast.LENGTH_SHORT).show();
+            NowPlaying.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mediaPlayer != null){
+                        int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                        track_seek.setProgress(currentPosition);
+                    }
+                    handler.postDelayed(this,1000);
+                }
+            });
+        }else {
+            Toast.makeText(this,"Playing your Music",Toast.LENGTH_SHORT).show();
+            playPauseBtn.setImageResource(R.drawable.ic_pause_btn);
+            mediaPlayer.start();
+            track_seek.setMax(mediaPlayer.getDuration() / 1000);
+            NowPlaying.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mediaPlayer != null){
+                        int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                        track_seek.setProgress(currentPosition);
+//                        duration_played.setText(formattedTime(currentPosition));
+//                    duration_total.setText(formattedTime(mediaPlayer.getDuration()));
+                    }
+                    handler.postDelayed(this,1000);
+                }
+            });
+        }
+    }
+
+    private void nxtThreadBtn(){
+    }
+
+    private void prevThreadBtn() {
+    }
+
     private String formattedTime(int currentPosition) {
-        String totalOut = "", totalNew = "";
+        String totalOut, totalNew;
         String seconds = String.valueOf(currentPosition % 60) ;
         String minutes = String.valueOf(currentPosition / 60);
         totalOut = minutes + ":" + seconds;
@@ -138,7 +207,9 @@ public class NowPlaying extends AppCompatActivity {
             mediaPlayer.start();
         }
         track_seek.setMax(mediaPlayer.getDuration() / 1000);
+        duration_total.setText(formattedTime(mediaPlayer.getDuration() / 1000));
 //        metaData(uri);
+
     }
 
     private void initViews() {
