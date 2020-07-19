@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             {
 //                initViewPager();
                 Toast.makeText(this,"!! PerMission Granted !!",Toast.LENGTH_LONG).show();
-                musicFiles = getAudio(this);
+//                musicFiles = getAudio(this);
             }else
             {
                 ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
