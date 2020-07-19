@@ -394,5 +394,6 @@ public class NowPlaying extends AppCompatActivity {
                     .load(R.drawable.ic_album)
                     .into(cover_art);
         }
+
     }
 }
