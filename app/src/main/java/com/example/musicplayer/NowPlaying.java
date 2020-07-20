@@ -158,8 +158,7 @@ public class NowPlaying extends AppCompatActivity {
                     if (mediaPlayer != null){
                         int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
                         track_seek.setProgress(currentPosition);
-//                        duration_played.setText(formattedTime(currentPosition));
-//                    duration_total.setText(formattedTime(mediaPlayer.getDuration()));
+
                     }
                     handler.postDelayed(this,1000);
                 }
