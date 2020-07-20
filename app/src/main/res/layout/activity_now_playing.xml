@@ -10,33 +10,29 @@
         android:id="@+id/trackDuration_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="356dp"
         android:layout_marginTop="52dp"
         android:text="4:00"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleTrack" />
 
     <ImageView
         android:id="@+id/coverArt"
         android:layout_width="392dp"
         android:layout_height="367dp"
-        android:layout_marginTop="36dp"
+        android:contentDescription="Cover Art of music played"
         android:foregroundTintMode="src_over"
         android:tint="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_album"
-        android:contentDescription="Cover Art of music played" />
+        app:srcCompat="@drawable/ic_album" />
 
     <TextView
         android:id="@+id/trackDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="52dp"
         android:text="1:00"
         android:textColor="#000000"
@@ -62,37 +58,35 @@
 
     <SeekBar
         android:id="@+id/seek_Track"
-        android:layout_width="324dp"
-        android:layout_height="17dp"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
         android:layout_marginTop="52dp"
         app:layout_constraintEnd_toStartOf="@+id/trackDuration_total"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/trackDuration"
         app:layout_constraintTop_toBottomOf="@+id/titleTrack" />
 
     <SeekBar
         android:id="@+id/seek_Vol"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="326dp"
+        android:layout_width="0dp"
         android:layout_height="29dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="1dp"
         android:max="10"
         android:progress="3"
         app:layout_constraintEnd_toStartOf="@+id/volUp"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/volDown"
         app:layout_constraintTop_toBottomOf="@+id/seek_Track" />
 
     <ImageButton
         android:id="@+id/shuffleBtn"
-        android:layout_width="37dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/allbtns"
         android:tint="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toEndOf="@+id/nxtBtn"
         app:layout_constraintTop_toBottomOf="@+id/volUp"
         app:srcCompat="@drawable/ic_shuffle_btn2" />
 
@@ -100,36 +94,36 @@
         android:id="@+id/play_pause_Btn"
         android:layout_width="80dp"
         android:layout_height="79dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/allbtns"
-        app:layout_constraintEnd_toStartOf="@+id/nxtBtn"
-        app:layout_constraintHorizontal_bias="0.333"
         android:clickable="true"
-        app:layout_constraintStart_toEndOf="@+id/previousBtn"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seek_Vol"
-        app:srcCompat="@drawable/ic_pause_btn"
-        android:focusable="true" />
+        app:srcCompat="@drawable/ic_pause_btn" />
 
     <ImageButton
         android:id="@+id/previousBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/allbtns"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/play_pause_Btn"
+        app:layout_constraintStart_toEndOf="@+id/repeatBtn"
         app:layout_constraintTop_toBottomOf="@+id/seek_Vol"
         app:srcCompat="@drawable/ic_previous" />
 
     <ImageButton
         android:id="@+id/repeatBtn"
-        android:layout_width="34dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/allbtns"
         android:tint="@color/colorBlack"
-        app:layout_constraintEnd_toStartOf="@+id/previousBtn"
-        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seek_Vol"
         app:srcCompat="@drawable/ic_repeat" />
@@ -158,10 +152,12 @@
         android:id="@+id/nxtBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/allbtns"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shuffleBtn"
+        app:layout_constraintStart_toEndOf="@+id/play_pause_Btn"
         app:layout_constraintTop_toBottomOf="@+id/seek_Vol"
         app:srcCompat="@drawable/ic_forward" />
 
