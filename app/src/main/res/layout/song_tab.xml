@@ -11,7 +11,7 @@
         android:layout_height="80dp">
 
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/music_art"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -19,12 +19,15 @@
             android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_oval="true"/>
 
         <TextView
             android:id="@+id/music_File_Name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_toEndOf="@+id/music_art"
             android:text="file name"
             android:textColor="@color/colorBlack"

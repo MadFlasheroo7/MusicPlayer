@@ -3,7 +3,6 @@ package com.example.musicplayer;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaMetadataRetriever;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,12 +56,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        try {
             return mFiles.size();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return getItemCount();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder
