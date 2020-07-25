@@ -44,6 +44,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         }else {
             Glide.with(mContext).load(R.drawable.ic_album).into(holder.album_Art);
         }
+        //if any song name is clicked it will play it in now playing activity
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +71,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         }
     }
 
+    //this function fetches the cover art from song and displays it in all songs list
     private byte[] albumArt(String uri)
     {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();

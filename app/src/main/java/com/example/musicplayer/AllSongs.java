@@ -21,6 +21,7 @@ public class AllSongs extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    //this just displays the songs in all songs fragment in a recycler view widget
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_songs_tab, container, false);

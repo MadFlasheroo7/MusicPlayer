@@ -1,3 +1,18 @@
+/*
+    Hey world Iam Jayesh Seth aka "Mad_Flasher" this is my first android project ,and it was successful due to android documentation and very kind developer friends
+    i'll try my best comment the code so that every one can understand i have done..........
+    .
+    .
+    .
+   Hope it helps you in some way
+   .
+   .
+   Keep Coding
+
+
+  It was started on june 10th of 2020
+  and any changes done will be updated here on github also
+ */
 package com.example.musicplayer;
 
 import androidx.annotation.NonNull;
@@ -29,7 +44,6 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -43,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         runTimePermission();
 
+        //Making Navigation drawer
         final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
 
+        //Giving on click to our hamburger icon
         findViewById(R.id.hamburger).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    //Using MediaStore to fetch audio files from device
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public static ArrayList<MusicFiles> getAudio(Context context){
         ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
@@ -108,12 +125,15 @@ public class MainActivity extends AppCompatActivity {
         return tempAudioList;
     }
 
+    //Requesting permission to read Internal Storage
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public void runTimePermission(){
         if (ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
         }else {
 //            Toast.makeText(this,"!! PerMission Granted !!",Toast.LENGTH_LONG).show();
+
+            // if the permission is granted it will show the audio files
             musicFiles = getAudio(this);
         }
     }
@@ -125,9 +145,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
             {
-//                initViewPager();
                 Toast.makeText(this,"!! PerMission Granted !!",Toast.LENGTH_LONG).show();
-//                musicFiles = getAudio(this);
             }else
             {
                 ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);

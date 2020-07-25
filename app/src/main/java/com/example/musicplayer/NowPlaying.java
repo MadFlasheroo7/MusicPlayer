@@ -1,22 +1,26 @@
+/*
+
+    Now Playing Activity
+
+ */
 package com.example.musicplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
+import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 
@@ -24,26 +28,32 @@ import static com.example.musicplayer.MainActivity.musicFiles;
 
 public class NowPlaying extends AppCompatActivity {
 
+    //Declaring Views
     TextView song_name, artist_name, duration_played, duration_total;
     ImageButton nxtBtn, prevBtn, playPauseBtn, repeatBtn, shuffleBtn;
     ImageView cover_art, vol_up, vol_down;
     SeekBar track_seek, seek_vol;
-    static ArrayList<MusicFiles> listSongs ;
+
+    static ArrayList<MusicFiles> listSongs = new ArrayList<>();
     static Uri uri;
     static MediaPlayer mediaPlayer;
     AudioManager audioManager;
     private Handler handler = new Handler();
-//    private Thread repeatBtnThread, shuffleBtnThread;
     int position = -1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_now_playing);
         initViews();
         getIntentMethod();
+
+        //setting the song title and artist
         song_name.setText(listSongs.get(position).getTitle());
         artist_name.setText(listSongs.get(position).getArtist());
+
+        //this code sets the seek bar progress
         track_seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -71,10 +81,11 @@ public class NowPlaying extends AppCompatActivity {
                     track_seek.setProgress(currentPosition);
                     duration_played.setText(formattedTime(currentPosition));
                 }
-                handler.postDelayed(this,900);
+                handler.postDelayed(this,1000);
             }
         });
 
+        //this code manages the Media Volume
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         assert audioManager != null;
         int maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -98,7 +109,6 @@ public class NowPlaying extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
@@ -107,53 +117,7 @@ public class NowPlaying extends AppCompatActivity {
         playThreadBtn();
         nxtThreadBtn();
         prevThreadBtn();
-        repeatThreadBtn();
-        shuffleThreadBtn();
         super.onResume();
-    }
-
-    private void shuffleThreadBtn()
-    {
-        Thread shuffleThread = new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                shuffleBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        shuffleBtnClicked();
-                    }
-                });
-            }
-        };
-        shuffleThread.start();
-    }
-
-    private void shuffleBtnClicked()
-    {
-        Toast.makeText(this,"!! Working on it !!",Toast.LENGTH_SHORT).show();
-    }
-
-    private void repeatThreadBtn()
-    {
-        Thread repeatThread = new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                repeatBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        repeatBtnClicked();
-                    }
-                });
-            }
-        };
-        repeatThread.start();
-    }
-
-    private void repeatBtnClicked()
-    {
-        Toast.makeText(this,"!! Working on it !!",Toast.LENGTH_SHORT).show();
     }
 
     private void playThreadBtn()
@@ -173,6 +137,7 @@ public class NowPlaying extends AppCompatActivity {
         playThread.start();
     }
 
+    //this function Plays/pause the song
     private void playPauseBtnClicked()
     {
         if (mediaPlayer.isPlaying())
@@ -196,7 +161,7 @@ public class NowPlaying extends AppCompatActivity {
             playPauseBtn.setImageResource(R.drawable.ic_pause_btn);
             mediaPlayer.start();
             track_seek.setMax(mediaPlayer.getDuration() / 1000);
-            NowPlaying.this.runOnUiThread( new Runnable() {
+            NowPlaying.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if (mediaPlayer != null){
@@ -227,21 +192,21 @@ public class NowPlaying extends AppCompatActivity {
         nxtThread.start();
     }
 
-
+    //this function is for navigating to Next song
     private void nxtBtnClicked()
     {
-        if (mediaPlayer.isPlaying())
-        {
             mediaPlayer.stop();
             mediaPlayer.release();
             position = ((position + 1) % listSongs.size());
             uri = Uri.parse(listSongs.get(position).getPath());
             mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
+            duration_total.setText(formattedTime(mediaPlayer.getDuration() / 1000));
+            metaData(uri);
             song_name.setText(listSongs.get(position).getTitle());
             artist_name.setText(listSongs.get(position).getArtist());
             track_seek.setMax(mediaPlayer.getDuration() / 1000);
-            Toast.makeText(this,"!! Working on it !!",Toast.LENGTH_SHORT).show();
-            playPauseBtn.setImageResource(R.drawable.ic_play_btn);
+            Toast.makeText(this,"!! Playing next song !!",Toast.LENGTH_SHORT).show();
+            playPauseBtn.setImageResource(R.drawable.ic_pause_btn);
             mediaPlayer.start();
             NowPlaying.this.runOnUiThread(new Runnable() {
                 @Override
@@ -253,28 +218,6 @@ public class NowPlaying extends AppCompatActivity {
                     handler.postDelayed(this,1000);
                 }
             });
-        }else {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            position = ((position + 1) % listSongs.size());
-            uri = Uri.parse(listSongs.get(position).getPath());
-            mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
-            song_name.setText(listSongs.get(position).getTitle());
-            artist_name.setText(listSongs.get(position).getArtist());
-            track_seek.setMax(mediaPlayer.getDuration() / 1000);
-            Toast.makeText(this,"...",Toast.LENGTH_SHORT).show();
-            NowPlaying.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (mediaPlayer != null){
-                        int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
-                        track_seek.setProgress(currentPosition);
-                    }
-                    handler.postDelayed(this,1000);
-                }
-            });
-            playPauseBtn.setImageResource(R.drawable.ic_play_btn);
-        }
     }
 
     private void prevThreadBtn()
@@ -294,18 +237,20 @@ public class NowPlaying extends AppCompatActivity {
         prevThread.start();
     }
 
-    private void prevBtnClicked() {
-        if (mediaPlayer.isPlaying())
-        {
+    //this function is for navigating to previous song
+    private void prevBtnClicked()
+    {
             mediaPlayer.stop();
             mediaPlayer.release();
             position = ((position - 1) % listSongs.size());
             uri = Uri.parse(listSongs.get(position).getPath());
             mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
+            duration_total.setText(formattedTime(mediaPlayer.getDuration() / 1000));
+            metaData(uri);
             song_name.setText(listSongs.get(position).getTitle());
             artist_name.setText(listSongs.get(position).getArtist());
             track_seek.setMax(mediaPlayer.getDuration() / 1000);
-              Toast.makeText(this,"!! Working on it !!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"!! Playing previous song !!",Toast.LENGTH_SHORT).show();
             NowPlaying.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -318,33 +263,13 @@ public class NowPlaying extends AppCompatActivity {
             });
             playPauseBtn.setImageResource(R.drawable.ic_pause_btn);
             mediaPlayer.start();
-        }else {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            position = ((position - 1) % listSongs.size());
-            uri = Uri.parse(listSongs.get(position).getPath());
-            mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
-            song_name.setText(listSongs.get(position).getTitle());
-            artist_name.setText(listSongs.get(position).getArtist());
-            track_seek.setMax(mediaPlayer.getDuration() / 1000);
-            Toast.makeText(this,"Pausing your Music....",Toast.LENGTH_SHORT).show();
-            NowPlaying.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (mediaPlayer != null){
-                        int currentPosition = mediaPlayer.getCurrentPosition() / 1000;
-                        track_seek.setProgress(currentPosition);
-                    }
-                    handler.postDelayed(this,1000);
-                }
-            });
-            playPauseBtn.setImageResource(R.drawable.ic_play_btn);
-        }
     }
 
+    //Formatting time to show current duration and total duration
     private String formattedTime(int currentPosition)
     {
-        String totalOut, totalNew;
+        String totalOut;
+        String totalNew;
         String seconds = String.valueOf(currentPosition % 60) ;
         String minutes = String.valueOf(currentPosition / 60);
         totalOut = minutes + ":" + seconds;
@@ -354,30 +279,9 @@ public class NowPlaying extends AppCompatActivity {
         }else {
             return totalOut;
         }
-//        String finalTimerString = "";
-//        String secondsString;
-//
-//        //Converting total duration into time
-//        int hours = (int) (currentPosition / 3600000);
-//        int minutes = (int) (currentPosition % 3600000) / 60000;
-//        int seconds = (int) ((currentPosition % 3600000) % 60000 / 1000);
-
-//        // Adding hours if any
-//        if (hours > 0)
-//            finalTimerString = hours + ":";
-//
-//        // Prepending 0 to seconds if it is one digit
-//        if (seconds < 10)
-//            secondsString = "0" + seconds;
-//        else
-//            secondsString = "" + seconds;
-//
-//        finalTimerString = finalTimerString + minutes + ":" + secondsString;
-//
-//        // Return timer String;
-//        return finalTimerString;
     }
 
+    //This method plays the song
     private void getIntentMethod()
     {
         position = getIntent().getIntExtra("Position",0);
@@ -394,9 +298,10 @@ public class NowPlaying extends AppCompatActivity {
         mediaPlayer.start();
         track_seek.setMax(mediaPlayer.getDuration() / 1000);
         duration_total.setText(formattedTime(mediaPlayer.getDuration() / 1000));
-//        metaData(uri);
+        metaData(uri);
     }
 
+    //Initializing the above declared Views
     private void initViews()
     {
         song_name = findViewById(R.id.titleTrack);
@@ -418,26 +323,24 @@ public class NowPlaying extends AppCompatActivity {
         seek_vol = findViewById(R.id.seek_Vol);
     }
 
+    //this function checks weather the audio file has a embedded image or not
+    private void metaData(Uri uri)
+    {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(uri.toString());
+        byte[] albumArt = retriever.getEmbeddedPicture();
+        if (albumArt != null){
+            Glide.with(this)
+                    .asBitmap()
+                    .load(albumArt)
+                    .into(cover_art);
+        }else {
+            Glide.with(this)
+                    .asDrawable()
+                    .load(R.drawable.ic_album)
+                    .into(cover_art);
+        }
 
-//    private void metaData(Uri uri)
-//    {
-//        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-//        retriever.setDataSource(uri.toString());
-////        int durationTotal = Integer.parseInt(listSongs.get(position).getDuration()) / 1000;
-////        duration_total.setText(formattedTime(durationTotal));
-//        byte[] albumArt = retriever.getEmbeddedPicture();
-//        if (albumArt != null){
-//            Glide.with(this)
-//                    .asBitmap()
-//                    .load(albumArt)
-//                    .into(cover_art);
-//        }else {
-//            Glide.with(this)
-//                    .asDrawable()
-//                    .load(R.drawable.ic_album)
-//                    .into(cover_art);
-//        }
-//
-//    }
+    }
 
 }
