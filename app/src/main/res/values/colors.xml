@@ -8,4 +8,6 @@
     <color name="colorGreen">#32CD32</color>
     <color name="colorBlack">#000000</color>
     <color name="black_overlay">#66000000</color>
+    <color name="spalsh_bg">#26E2FF</color>
+    <color name="colorGrey">#FFFFFF</color>
 </resources>

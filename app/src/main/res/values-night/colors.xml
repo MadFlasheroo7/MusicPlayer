@@ -3,9 +3,11 @@
     <color name="colorPrimary">#673AB7</color>
     <color name="colorPrimaryDark">#512DA8</color>
     <color name="colorAccent">#FF5252</color>
-    <color name="colorPrimaryText">#000</color>
-    <color name="colorWhite">#fff</color>
+    <color name="colorPrimaryText">#FFFFFF</color>
+    <color name="colorWhite">#000000</color>
     <color name="colorGreen">#32CD32</color>
     <color name="colorBlack">#FFFFFF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="spalsh_bg">#26E2FF</color>
+    <color name="colorGrey">#252525</color>
 </resources>

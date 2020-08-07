@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/audio_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:outlineSpotShadowColor="@color/colorWhite"
     android:layout_margin="8dp"
-    android:background="@drawable/allbtns"
-    android:longClickable="true"
     app:cardCornerRadius="20dp"
-    app:cardElevation="12dp"
-    app:cardMaxElevation="24dp">
+    android:id="@+id/audio_item">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,12 +18,12 @@
             android:id="@+id/music_art"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:padding="5dp"
             android:src="@drawable/ic_album"
+            android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:riv_oval="true" />
+            app:riv_oval="true"/>
 
         <TextView
             android:id="@+id/music_File_Name"

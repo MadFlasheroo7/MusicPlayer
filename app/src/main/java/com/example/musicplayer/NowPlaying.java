@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.icu.text.CaseMap;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -155,7 +156,7 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
             playPauseBtn.setImageResource(R.drawable.ic_play_btn);
             mediaPlayer.pause();
             track_seek.setMax(mediaPlayer.getDuration() / 1000);
-            Toast.makeText(this,"Pausing your Music....",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Pausing your music....",Toast.LENGTH_SHORT).show();
             NowPlaying.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -167,7 +168,7 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
                 }
             });
         }else {
-            Toast.makeText(this,"Playing your Music",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Playing your music",Toast.LENGTH_SHORT).show();
             playPauseBtn.setImageResource(R.drawable.ic_pause_btn);
             mediaPlayer.start();
             track_seek.setMax(mediaPlayer.getDuration() / 1000);
@@ -404,11 +405,11 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
     @Override
     public void onCompletion(MediaPlayer mediaPlayer) {
         nxtBtnClicked();
-        if (mediaPlayer != null)
-        {
-            mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
-            mediaPlayer.start();
-            mediaPlayer.setOnCompletionListener(this);
-        }
+//        if (mediaPlayer != null)
+//        {
+//            mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
+//            mediaPlayer.start();
+//            mediaPlayer.setOnCompletionListener(this);
+//        }
     }
 }
