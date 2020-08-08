@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/audio_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,7 +20,7 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/music_art"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="0dp"
             android:padding="5dp"
             android:src="@drawable/ic_album"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,14 +33,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_toEndOf="@+id/music_art"
             android:text="file name"
             android:textColor="@color/colorPrimaryText"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/more_menu"
             app:layout_constraintStart_toEndOf="@+id/music_art"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/more_menu"
+            android:layout_width="38dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_more_menu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

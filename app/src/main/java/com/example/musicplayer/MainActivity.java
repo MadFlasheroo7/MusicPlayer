@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     static ArrayList<MusicFiles> musicFiles;
     public static final int REQUEST_CODE = 1;
+    static boolean shuffleBoolean = false, repeatBoolean = false;
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Using MediaStore to fetch audio files from device
-    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @RequiresApi(api = Build.VERSION_CODES.R)
     public static ArrayList<MusicFiles> getAudio(Context context){
         ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 MediaStore.Audio.Media.DURATION,
                 MediaStore.Audio.Media.DATA, // for Path
                 MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media._ID
         };
         @SuppressLint("Recycle")
         Cursor cursor = context.getContentResolver().query(uri,proj,null,null,null,null);
@@ -115,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
                 String path = cursor.getString(3);
                 String artist = cursor.getString(4);
 
-                MusicFiles musicFiles = new MusicFiles(path,title,artist,duration,album);
+                String id = cursor.getString(5);
+                MusicFiles musicFiles = new MusicFiles(path,title,artist,duration,album,id);
                 Log.e("Path : " + path,"Album : " + album);
                 Log.e("Title : " + title,"Artist : " + artist);
                 tempAudioList.add(musicFiles);
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Requesting permission to read Internal Storage
-    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @RequiresApi(api = Build.VERSION_CODES.R)
     public void runTimePermission(){
         if (ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
