@@ -298,7 +298,7 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
         {
             position = getRandom(listSongs.size() - 1);
         }else if (!shuffleBoolean && !repeatBoolean){
-            position = ((position + 1) % listSongs.size());
+            position = ((position - 1) % listSongs.size());
         }
             uri = Uri.parse(listSongs.get(position).getPath());
             mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);

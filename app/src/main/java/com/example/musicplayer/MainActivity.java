@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setItemIconTintList(null);
 
         NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome,R.id.menuNowPlaying).build();
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome,R.id.menuNowPlaying,R.id.menuAbout).build();
 //        NavigationUI.setupActionBarWithNavController(this,navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 

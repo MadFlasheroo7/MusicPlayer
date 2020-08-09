@@ -20,4 +20,9 @@
         android:name="com.example.musicplayer.NowPlaying"
         android:label="activity_now_playing"
         tools:layout="@layout/activity_now_playing" />
+    <activity
+        android:id="@+id/menuAbout"
+        android:name="com.example.musicplayer.About_activity"
+        android:label="activity_about_ui"
+        tools:layout="@layout/activity_about_ui" />
 </navigation>

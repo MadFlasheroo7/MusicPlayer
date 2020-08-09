@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
     <item
         android:id="@+id/menuHome"
         android:icon="@drawable/ic_outline_home_24"
@@ -35,8 +36,15 @@
         android:icon="@drawable/ic_settings"
         android:title="Settings" />
 
+    <item
+        android:id="@+id/menuAbout"
+        android:icon="@drawable/ic_about"
+        android:title="About" />
+    </group>
+
     <item android:title="Developer's Contact">
         <menu>
+            <group android:checkableBehavior="single">
             <item
                 android:id="@+id/menuTwitter"
                 android:icon="@drawable/ic_album"
@@ -56,7 +64,9 @@
                 android:id="@+id/menuReddit"
                 android:icon="@drawable/ic_album"
                 android:title="Reddit" />
+            </group>
         </menu>
+
     </item>
 
 </menu>

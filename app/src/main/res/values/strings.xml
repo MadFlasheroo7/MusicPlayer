@@ -5,4 +5,5 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="about_text">What is this app ?\nThis app is made by Jayesh Seth ,as this his first android application u may find some issues but non the less it\'s working fine and i will try my best to add new features \n \n How to contact me? \n i will add links to my social Media\n(Ps:If its not redirecting to my social media that means iam working on it :) )</string>
 </resources>
