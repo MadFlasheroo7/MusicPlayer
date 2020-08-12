@@ -1,5 +1,7 @@
 package com.example.musicplayer;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,16 +27,20 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.util.ArrayList;
 
+import static com.example.musicplayer.MainActivity.CHANNEL_1_ID;
+
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder> {
 
     private Context mContext;
     private ArrayList<MusicFiles> mFiles;
+    private NotificationManager notificationManager;
 
     public MusicAdapter(Context mContext,ArrayList<MusicFiles> mFiles){
 
         this.mFiles = mFiles;
         this.mContext = mContext;
     }
+
 
     @NonNull
     @Override
@@ -42,10 +49,11 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         return new MyViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.file_Name.setText(mFiles.get(position).getTitle());
-        byte[] image = albumArt(mFiles.get(position).getPath());
+        final byte[] image = albumArt(mFiles.get(position).getPath());
         if (image != null)
         {
             Glide.with(mContext).asBitmap().load(image).into(holder.album_Art);
@@ -62,6 +70,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             }
         });
 
+
         holder.menu_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -73,8 +82,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.delete:
-                                Toast.makeText(mContext,"Delete clicked",Toast.LENGTH_SHORT).show();
-//                                Snackbar.make(view,"Delete Clicked",Snackbar.LENGTH_SHORT).show();
+//                                Toast.makeText(mContext,"Delete clicked",Toast.LENGTH_SHORT).show();
                                 deleteFile(position,view);
                                 break;
                         }
@@ -118,7 +126,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
     }
 
     //this function fetches the cover art from song and displays it in all songs list
-    private byte[] albumArt(String uri)
+    private static byte[] albumArt(String uri)
     {
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(uri);

@@ -6,8 +6,13 @@
 package com.example.musicplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.media.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.icu.text.CaseMap;
@@ -17,6 +22,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
@@ -31,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+import static com.example.musicplayer.MainActivity.CHANNEL_1_ID;
 import static com.example.musicplayer.MainActivity.musicFiles;
 import static com.example.musicplayer.MainActivity.repeatBoolean;
 import static com.example.musicplayer.MainActivity.shuffleBoolean;
@@ -43,12 +50,12 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
     ImageView cover_art, vol_up, vol_down;
     SeekBar track_seek, seek_vol;
 
-    static ArrayList<MusicFiles> listSongs = new ArrayList<>();
+    static ArrayList<MusicFiles> listSongs;
     static Uri uri;
     static MediaPlayer mediaPlayer;
     AudioManager audioManager;
     private Handler handler = new Handler();
-    int position = -1;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -126,7 +133,8 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
         shuffleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (shuffleBoolean){
+                if (shuffleBoolean)
+                {
                     shuffleBoolean = false;
                     shuffleBtn.setImageResource(R.drawable.ic_shuffle_btn2);
                 }else {
@@ -143,12 +151,34 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
                 {
                     repeatBoolean = false;
                     repeatBtn.setImageResource(R.drawable.ic_repeat);
-                }else {
+                }else{
                     repeatBoolean = true;
                     repeatBtn.setImageResource(R.drawable.ic_repeat_on);
                 }
             }
         });
+
+
+        Bitmap pic = BitmapFactory.decodeResource(getResources(),R.drawable.box2);
+        MediaSessionCompat mediaSessionCompat = new MediaSessionCompat(this,"tsg");
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+//        String title = listSongs.get(position).getTitle();
+        Notification notification = new androidx.core.app.NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_notification_icon)
+                .setLargeIcon(pic)
+//                .setContentTitle(title)
+                .addAction(R.drawable.ic_repeat,"Repeat",null)
+                .addAction(R.drawable.ic_notification_prev,"previous",null)
+                .addAction(R.drawable.ic_play,"play",null)
+                .addAction(R.drawable.ic_notification_nxt,"Next button",null)
+                .addAction(R.drawable.ic_shuffle_btn2,"Shuffle",null)
+//                .setStyle(new NotificationCompat.MediaStyle().setShowActionsInCompactView(1,2,3))
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(1,2,3)
+                        .setMediaSession(mediaSessionCompat.getSessionToken()))
+                .setPriority(androidx.core.app.NotificationCompat.PRIORITY_HIGH)
+                .build();
+        notificationManager.notify(1, notification);
+
     }
 
     @Override
@@ -267,7 +297,8 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
         mediaPlayer.setOnCompletionListener(this);
     }
 
-    private int getRandom(int i) {
+    private int getRandom(int i)
+    {
         Random random = new Random();
         return random.nextInt(i + 1);
     }
@@ -387,19 +418,26 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(uri.toString());
         byte[] albumArt = retriever.getEmbeddedPicture();
-
         if (albumArt != null){
+
+//            bitmap = BitmapFactory.decodeByteArray(albumArt, 0, albumArt.length);
             Glide.with(this)
                     .asBitmap()
                     .load(albumArt)
                     .into(cover_art);
-//            AlbumartAnimation(this,cover_art, null);
-        }else {
+
+            AlbumartAnimation(this,cover_art, null);
+        }else
+            {
             Glide.with(this)
                     .asDrawable()
                     .load(R.drawable.ic_album)
                     .into(cover_art);
-//            AlbumartAnimation(this,cover_art, null);
+//            Glide.with(this)
+//                    .asGif()
+//                    .load(R.drawable.cat)
+//                    .into(cover_art);
+            AlbumartAnimation(this,cover_art, null);
         }
 //        AlbumartAnimation(this,cover_art, null);
     }
@@ -407,8 +445,8 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
     //Album art animation
     private void AlbumartAnimation(final Context context, final ImageView imageView, final Bitmap bitmap)
     {
-        Animation anim_OUT = AnimationUtils.loadAnimation(context,android.R.anim.fade_out);
-        final Animation anim_IN = AnimationUtils.loadAnimation(context,android.R.anim.fade_in);
+        final Animation anim_OUT = AnimationUtils.loadAnimation(context,android.R.anim.slide_out_right);
+        final Animation anim_IN = AnimationUtils.loadAnimation(context,android.R.anim.slide_in_left);
         anim_OUT.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -417,7 +455,7 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Glide.with(context).load(bitmap).into(imageView);
+//                Glide.with(context).load(bitmap).into(imageView);
                 anim_IN.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -445,12 +483,12 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
         imageView.startAnimation(anim_OUT);
     }
 
-
     @Override
     public void onCompletion(MediaPlayer mediaPlayer) {
         nxtBtnClicked();
 //        if (mediaPlayer != null)
 //        {
+//            Toast.makeText(this, "Automatically playing next song", Toast.LENGTH_SHORT).show();
 //            mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
 //            mediaPlayer.start();
 //            mediaPlayer.setOnCompletionListener(this);

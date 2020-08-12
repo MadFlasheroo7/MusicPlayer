@@ -16,20 +16,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/seek_Track" />
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <ImageView
         android:id="@+id/coverArt"
         android:layout_width="0dp"
         android:layout_height="350dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:contentDescription="Cover Art of music played"
         android:foregroundTintMode="src_over"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_album"
         app:layout_constraintBottom_toTopOf="@+id/titleTrack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8"
-        app:riv_oval="true"
+
         tools:ignore="HardcodedText" />
 
 
@@ -62,7 +64,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coverArt"
-        app:layout_constraintVertical_bias="0.7"
         tools:ignore="HardcodedText" />
 
     <SeekBar
@@ -94,6 +95,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:scaleType="fitXY"
+        android:padding="2dp"
         android:background="@drawable/allbtns"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/nxtBtn"
@@ -130,6 +133,7 @@
         android:id="@+id/repeatBtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:scaleType="centerCrop"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/allbtns"
@@ -142,22 +146,22 @@
         android:id="@+id/volDown"
         android:layout_width="33dp"
         android:layout_height="30dp"
-        android:tint="@color/colorBlack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/seek_Vol"
         app:srcCompat="@drawable/ic_volume_down"
         android:backgroundTint="#fff"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        app:tint="@color/colorBlack" />
 
     <ImageView
         android:id="@+id/volUp"
         android:layout_width="33dp"
         android:layout_height="30dp"
-        android:tint="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/seek_Vol"
         app:srcCompat="@drawable/ic_volume_up"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        app:tint="@color/colorBlack" />
 
     <ImageButton
         android:id="@+id/nxtBtn"
@@ -191,11 +195,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:tint="#000000"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_arrow_up" />
+        app:srcCompat="@drawable/ic_arrow_up"
+        app:tint="@color/colorBlack" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

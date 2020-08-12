@@ -9,6 +9,7 @@
                 <item android:color="#FFFF00F7" android:offset="1"/>
             </gradient>
         </aapt:attr>
+
     </path>
     <path android:fillColor="#00000000"
         android:pathData="M35.5,29.499L35.5,52.499"

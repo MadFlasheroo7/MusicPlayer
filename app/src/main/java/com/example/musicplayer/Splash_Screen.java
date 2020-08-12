@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Splash_Screen extends AppCompatActivity
 {
-    private  static int SPLASH_SCREEN = 2500;
+    private  static int SPLASH_SCREEN = 2000;
     Animation topAnim,bottomAnim;
     ImageView music,player,mbox;
     @Override

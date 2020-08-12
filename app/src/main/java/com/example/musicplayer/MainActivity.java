@@ -30,6 +30,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<MusicFiles> musicFiles;
     public static final int REQUEST_CODE = 1;
     static boolean shuffleBoolean = false, repeatBoolean = false;
+    public static final String CHANNEL_1_ID = "channel1";
+//    public static final String CHANNEL_2_ID = "channel2";
+
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         runTimePermission();
+        CreateNotificationChannel();
 
         //Making Navigation drawer
         final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
@@ -76,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this,navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
 //        final TextView textTitle = findViewById(R.id.textTitle);
 //
 //        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -84,7 +91,23 @@ public class MainActivity extends AppCompatActivity {
 //                textTitle.setText(destination.getLabel());
 //            }
 //        });
+
     }
+
+    private void CreateNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel notificationChannel = new NotificationChannel(
+                    CHANNEL_1_ID,"Music Player's notification", NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.setDescription("This is my first notification");
+//            NotificationChannel notificationChannel2 = new NotificationChannel(
+//                    CHANNEL_2_ID,"Music Player's notification", NotificationManager.IMPORTANCE_LOW);
+//            notificationChannel2.setDescription("This is my second notification");
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(notificationChannel);
+//            manager.createNotificationChannel(notificationChannel2);
+        }
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
