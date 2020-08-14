@@ -25,4 +25,5 @@
         android:name="com.example.musicplayer.About_activity"
         android:label="activity_about_ui"
         tools:layout="@layout/activity_about_ui" />
+
 </navigation>

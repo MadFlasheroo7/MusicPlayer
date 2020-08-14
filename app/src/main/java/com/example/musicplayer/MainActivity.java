@@ -1,5 +1,6 @@
-/*
-    Hey world Iam Jayesh Seth aka "Mad_Flasher" this is my first android project ,and it was successful due to android documentation and very kind developer friends
+/*  Hey world Iam Jayesh Seth aka "Mad_Flasher"
+
+    This is my first android project ,and it was successful due to android documentation and very kind developer friends
     i'll try my best comment the code so that every one can understand i have done..........
     .
     .
@@ -22,6 +23,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -33,6 +35,7 @@ import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -40,20 +43,29 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
+import static com.example.musicplayer.MusicAdapter.mContext;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     static ArrayList<MusicFiles> musicFiles;
+    static ArrayAdapter<MusicAdapter> musicAdapter;
+    SearchView searchView;
     public static final int REQUEST_CODE = 1;
     static boolean shuffleBoolean = false, repeatBoolean = false;
     public static final String CHANNEL_1_ID = "channel1";
-//    public static final String CHANNEL_2_ID = "channel2";
 
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -75,13 +87,61 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         NavigationView navigationView = findViewById(R.id.navigationView);
-        navigationView.setItemIconTintList(null);
 
         NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome,R.id.menuNowPlaying,R.id.menuAbout).build();
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome,
+                R.id.menuNowPlaying,
+                R.id.menuAbout).build();
 //        NavigationUI.setupActionBarWithNavController(this,navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.menuTG:
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("https://t.me/mad_flasher_oo7"));
+                        startActivity(intent);
+                        break;
+
+                    case R.id.menuTwitter:
+                        Intent intent1 = new Intent(Intent.ACTION_VIEW);
+                        intent1.setData(Uri.parse("https://twitter.com/jayesh_seth_"));
+                        startActivity(intent1);
+                        break;
+//                    case R.id.menuInstagram:
+//                        Intent intent2 = new Intent((Intent.ACTION_VIEW));
+//                        intent2.setData(Uri.parse("https://www.instagram.com/iam_the_iron_man/"));
+//                        startActivity(intent2);
+//                        break;
+//                    case R.id.menuReddit:
+//                        Intent intent3 = new Intent((Intent.ACTION_VIEW));
+//                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
+//                        startActivity(intent3);
+//                        break;
+//                    case R.id.menuAbout:
+////                        Intent intent4 = new Intent(getApplicationContext(),About_activity.class);
+////////                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
+////                        startActivity(intent4);
+////                        break;
+//////                    case R.id.menuAllsongs:
+//////                        getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new AllSongs()).commit();
+//////                        Intent intent5 = new Intent(getApplicationContext(),AllSongs.class);
+////////                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
+//////                        startActivity(intent5);
+//////                        break;
+////                    case R.id.menuHome:
+//////                        getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new Home()).commit();
+//////                        Intent intent5 = new Intent(getApplicationContext(),AllSongs.class);
+////////                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
+//////                        startActivity(intent5);
+////                        break;
+                }
+                return false;
+            }
+        });
 
 //        final TextView textTitle = findViewById(R.id.textTitle);
 //
@@ -92,9 +152,31 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                String userInput = s.toLowerCase();
+                ArrayList<MusicFiles> mFiles = new ArrayList<>();
+                for (MusicFiles song : musicFiles){
+                    if (song.getTitle().toLowerCase().contains(userInput)){
+                        mFiles.add(song);
+                    }
+                }
+                AllSongs.musicAdapter.updateList(mFiles);
+                return true;
+            }
+        });
     }
 
-    private void CreateNotificationChannel() {
+
+    private void CreateNotificationChannel()
+    {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel notificationChannel = new NotificationChannel(
                     CHANNEL_1_ID,"Music Player's notification", NotificationManager.IMPORTANCE_HIGH);
@@ -113,8 +195,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)|| super.onSupportNavigateUp();
     }
-
-
 
     //Using MediaStore to fetch audio files from device
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -166,7 +246,8 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED)

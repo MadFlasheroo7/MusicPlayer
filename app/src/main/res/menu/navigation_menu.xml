@@ -46,23 +46,23 @@
         <menu>
             <group android:checkableBehavior="single">
             <item
-                android:id="@+id/menuTwitter"
-                android:icon="@drawable/ic_album"
-                android:title="Twitter" />
-
-            <item
-                android:id="@+id/menuInstagram"
-                android:icon="@drawable/ic_album"
-                android:title="Instagram" />
-
-            <item
                 android:id="@+id/menuTG"
-                android:icon="@drawable/ic_album"
+                android:icon="@drawable/ic_telegram"
                 android:title="Telegram" />
 
             <item
+                android:id="@+id/menuInstagram"
+                android:icon="@drawable/ic_instagram"
+                android:title="Instagram" />
+
+            <item
+                android:id="@+id/menuTwitter"
+                android:icon="@drawable/ic_twitter"
+                android:title="Twitter" />
+
+            <item
                 android:id="@+id/menuReddit"
-                android:icon="@drawable/ic_album"
+                android:icon="@drawable/ic_reddit"
                 android:title="Reddit" />
             </group>
         </menu>

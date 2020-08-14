@@ -31,8 +31,8 @@ import static com.example.musicplayer.MainActivity.CHANNEL_1_ID;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder> {
 
-    private Context mContext;
-    private ArrayList<MusicFiles> mFiles;
+    static Context mContext;
+    static ArrayList<MusicFiles> mFiles;
     private NotificationManager notificationManager;
 
     public MusicAdapter(Context mContext,ArrayList<MusicFiles> mFiles){
@@ -133,5 +133,11 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         byte[] art = retriever.getEmbeddedPicture();
         retriever.release();
         return art;
+    }
+
+    void updateList(ArrayList<MusicFiles> musicFilesArrayList){
+        mFiles = new ArrayList<>();
+        mFiles.addAll(musicFilesArrayList);
+        notifyDataSetChanged();
     }
 }

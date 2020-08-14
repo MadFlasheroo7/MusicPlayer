@@ -14,7 +14,7 @@ import static com.example.musicplayer.MainActivity.musicFiles;
 public class AllSongs extends Fragment {
 
     RecyclerView recyclerView;
-    MusicAdapter musicAdapter;
+    static MusicAdapter musicAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

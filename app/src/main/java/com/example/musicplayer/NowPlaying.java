@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -41,6 +42,7 @@ import static com.example.musicplayer.MainActivity.CHANNEL_1_ID;
 import static com.example.musicplayer.MainActivity.musicFiles;
 import static com.example.musicplayer.MainActivity.repeatBoolean;
 import static com.example.musicplayer.MainActivity.shuffleBoolean;
+import static com.example.musicplayer.MusicAdapter.mFiles;
 
 public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
 
@@ -56,6 +58,7 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
     AudioManager audioManager;
     private Handler handler = new Handler();
     int position;
+    static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -374,7 +377,7 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
     private void getIntentMethod()
     {
         position = getIntent().getIntExtra("Position",0);
-        listSongs = musicFiles;
+        listSongs = mFiles;
         if (listSongs != null){
             playPauseBtn.setImageResource(R.drawable.ic_pause_btn);
             uri = Uri.parse(listSongs.get(position).getPath());
@@ -494,4 +497,6 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
 //            mediaPlayer.setOnCompletionListener(this);
 //        }
     }
+
+
 }
