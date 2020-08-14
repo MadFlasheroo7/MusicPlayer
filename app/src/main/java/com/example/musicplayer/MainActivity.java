@@ -94,7 +94,12 @@ public class MainActivity extends AppCompatActivity {
                 R.id.menuAbout).build();
 //        NavigationUI.setupActionBarWithNavController(this,navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        navigationView.setElevation(24);
 
+
+        /*
+            After adding these codes it got fucked up
+         */
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -111,33 +116,25 @@ public class MainActivity extends AppCompatActivity {
                         intent1.setData(Uri.parse("https://twitter.com/jayesh_seth_"));
                         startActivity(intent1);
                         break;
-//                    case R.id.menuInstagram:
-//                        Intent intent2 = new Intent((Intent.ACTION_VIEW));
-//                        intent2.setData(Uri.parse("https://www.instagram.com/iam_the_iron_man/"));
-//                        startActivity(intent2);
-//                        break;
-//                    case R.id.menuReddit:
-//                        Intent intent3 = new Intent((Intent.ACTION_VIEW));
-//                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
-//                        startActivity(intent3);
-//                        break;
-//                    case R.id.menuAbout:
-////                        Intent intent4 = new Intent(getApplicationContext(),About_activity.class);
-////////                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
-////                        startActivity(intent4);
-////                        break;
-//////                    case R.id.menuAllsongs:
-//////                        getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new AllSongs()).commit();
-//////                        Intent intent5 = new Intent(getApplicationContext(),AllSongs.class);
-////////                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
-//////                        startActivity(intent5);
-//////                        break;
-////                    case R.id.menuHome:
-//////                        getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new Home()).commit();
-//////                        Intent intent5 = new Intent(getApplicationContext(),AllSongs.class);
-////////                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
-//////                        startActivity(intent5);
-////                        break;
+                    case R.id.menuInstagram:
+                        Intent intent2 = new Intent((Intent.ACTION_VIEW));
+                        intent2.setData(Uri.parse("https://www.instagram.com/iam_the_iron_man/"));
+                        startActivity(intent2);
+                        break;
+                    case R.id.menuReddit:
+                        Intent intent3 = new Intent((Intent.ACTION_VIEW));
+                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
+                        startActivity(intent3);
+                        break;
+                    case R.id.menuAbout:
+                        Intent intent4 = new Intent(getApplicationContext(),About_activity.class);
+                        startActivity(intent4);
+                        break;
+                    case R.id.menuAllsongs:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new AllSongs()).commit();
+                        Intent intent5 = new Intent(getApplicationContext(),AllSongs.class);
+                        startActivity(intent5);
+                        break;
                 }
                 return false;
             }
