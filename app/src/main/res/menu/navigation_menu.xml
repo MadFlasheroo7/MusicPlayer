@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <group android:checkableBehavior="single">
     <item
         android:id="@+id/menuHome"
@@ -42,31 +43,30 @@
         android:title="About" />
     </group>
 
-    <item android:title="Developer's Contact">
-        <menu>
-            <group android:checkableBehavior="single">
-            <item
-                android:id="@+id/menuTG"
-                android:icon="@drawable/ic_telegram"
-                android:title="Telegram" />
+<!--    <item android:title="Developer's Contact">-->
+<!--        <menu>-->
+<!--            <group android:checkableBehavior="single">-->
+<!--            <item-->
+<!--                android:id="@+id/menuTG"-->
+<!--                android:icon="@drawable/ic_telegram"-->
+<!--                android:title="Telegram" />-->
 
-            <item
-                android:id="@+id/menuInstagram"
-                android:icon="@drawable/ic_instagram"
-                android:title="Instagram" />
+<!--            <item-->
+<!--                android:id="@+id/menuInstagram"-->
+<!--                android:icon="@drawable/ic_instagram"-->
+<!--                android:title="Instagram" />-->
 
-            <item
-                android:id="@+id/menuTwitter"
-                android:icon="@drawable/ic_twitter"
-                android:title="Twitter" />
+<!--            <item-->
+<!--                android:id="@+id/menuTwitter"-->
+<!--                android:icon="@drawable/ic_twitter"-->
+<!--                android:title="Twitter" />-->
 
-            <item
-                android:id="@+id/menuReddit"
-                android:icon="@drawable/ic_reddit"
-                android:title="Reddit" />
-            </group>
-        </menu>
-
-    </item>
+<!--            <item-->
+<!--                android:id="@+id/menuReddit"-->
+<!--                android:icon="@drawable/ic_reddit"-->
+<!--                android:title="Reddit" />-->
+<!--            </group>-->
+<!--        </menu>-->
+<!--    </item>-->
 
 </menu>

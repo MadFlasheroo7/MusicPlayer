@@ -32,6 +32,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -44,6 +45,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<MusicFiles> musicFiles;
     static ArrayAdapter<MusicAdapter> musicAdapter;
     SearchView searchView;
+    DrawerLayout drawerLayout;
     public static final int REQUEST_CODE = 1;
     static boolean shuffleBoolean = false, repeatBoolean = false;
     public static final String CHANNEL_1_ID = "channel1";
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         CreateNotificationChannel();
 
         //Making Navigation drawer
-        final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout = findViewById(R.id.drawerLayout);
 
         //Giving on click to our hamburger icon
         findViewById(R.id.hamburger).setOnClickListener(new View.OnClickListener() {
@@ -91,54 +94,57 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome,
                 R.id.menuNowPlaying,
-                R.id.menuAbout).build();
+                R.id.menuAbout,R.id.menuSettings).build();
+        
 //        NavigationUI.setupActionBarWithNavController(this,navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView.setElevation(24);
-
 
         /*
             After adding these codes it got fucked up
          */
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.menuTG:
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("https://t.me/mad_flasher_oo7"));
-                        startActivity(intent);
-                        break;
-
-                    case R.id.menuTwitter:
-                        Intent intent1 = new Intent(Intent.ACTION_VIEW);
-                        intent1.setData(Uri.parse("https://twitter.com/jayesh_seth_"));
-                        startActivity(intent1);
-                        break;
-                    case R.id.menuInstagram:
-                        Intent intent2 = new Intent((Intent.ACTION_VIEW));
-                        intent2.setData(Uri.parse("https://www.instagram.com/iam_the_iron_man/"));
-                        startActivity(intent2);
-                        break;
-                    case R.id.menuReddit:
-                        Intent intent3 = new Intent((Intent.ACTION_VIEW));
-                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
-                        startActivity(intent3);
-                        break;
-                    case R.id.menuAbout:
-                        Intent intent4 = new Intent(getApplicationContext(),About_activity.class);
-                        startActivity(intent4);
-                        break;
-                    case R.id.menuAllsongs:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new AllSongs()).commit();
-                        Intent intent5 = new Intent(getApplicationContext(),AllSongs.class);
-                        startActivity(intent5);
-                        break;
-                }
-                return false;
-            }
-        });
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId())
+//                {
+//                    case R.id.menuTG:
+//                        Intent intent = new Intent(Intent.ACTION_VIEW);
+//                        intent.setData(Uri.parse("https://t.me/mad_flasher_oo7"));
+//                        startActivity(intent);
+//                        break;
+//
+//                    case R.id.menuTwitter:
+//                        Intent intent1 = new Intent(Intent.ACTION_VIEW);
+//                        intent1.setData(Uri.parse("https://twitter.com/jayesh_seth_"));
+//                        startActivity(intent1);
+//                        break;
+//                    case R.id.menuInstagram:
+//                        Intent intent2 = new Intent((Intent.ACTION_VIEW));
+//                        intent2.setData(Uri.parse("https://www.instagram.com/iam_the_iron_man/"));
+//                        startActivity(intent2);
+//                        break;
+//                    case R.id.menuReddit:
+//                        Intent intent3 = new Intent((Intent.ACTION_VIEW));
+//                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
+//                        startActivity(intent3);
+//                        break;
+//                    case R.id.menuAbout:
+//                        Intent intent4 = new Intent(getApplicationContext(),About_activity.class);
+//                        startActivity(intent4);
+//                        break;
+//                    case R.id.menuHome:
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new Home()).commit();
+////                        Intent intent5 = new Intent(getApplicationContext(),AllSongs.class);
+////                        startActivity(intent5);
+//                        break;
+////                    case R.id.menuHome:
+////                        Navigation.findNavController((Activity) getApplicationContext(),R.id.navHostFragment).navigate(R.id.menuHome);
+////                        break;
+//                }
+////                drawerLayout.closeDrawer(GravityCompat.START);
+//                return false;
+//            }
+//        });
 
 //        final TextView textTitle = findViewById(R.id.textTitle);
 //
@@ -258,5 +264,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.navigation_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
 }

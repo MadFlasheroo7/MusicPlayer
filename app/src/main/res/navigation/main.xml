@@ -25,5 +25,11 @@
         android:name="com.example.musicplayer.About_activity"
         android:label="activity_about_ui"
         tools:layout="@layout/activity_about_ui" />
+    <activity
+        android:id="@+id/menuSettings"
+        android:name="com.example.musicplayer.Settings_Activity"
+        android:label="activity_settings"
+        tools:layout="@layout/activity_settings" />
+
 
 </navigation>
