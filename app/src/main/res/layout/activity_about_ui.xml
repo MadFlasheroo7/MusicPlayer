@@ -43,6 +43,48 @@
             android:text="@string/about_text"
             android:textColor="@color/colorPrimaryText"
             app:lineHeight="20dp" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="contact me"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/TG"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/allbtns"
+                app:srcCompat="@drawable/ic_telegram"
+                tools:ignore="ContentDescription" />
+            <ImageButton
+                android:id="@+id/insta"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/allbtns"
+                app:srcCompat="@drawable/ic_instagram"
+                tools:ignore="ContentDescription" />
+            <ImageButton
+                android:id="@+id/tweet"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/allbtns"
+                app:srcCompat="@drawable/ic_twitter"
+                tools:ignore="ContentDescription" />
+            <ImageButton
+                android:id="@+id/reddit"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/allbtns"
+                app:srcCompat="@drawable/ic_reddit"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -63,4 +105,5 @@
             android:text="About !!"
             android:textColor="@color/colorPrimaryText"
             android:textSize="24sp" />
-    </LinearLayout></androidx.constraintlayout.motion.widget.MotionLayout>
+    </LinearLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

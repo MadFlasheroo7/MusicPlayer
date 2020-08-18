@@ -2,6 +2,7 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutStart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".About_activity"
@@ -43,6 +44,12 @@
             android:text="@string/about_text"
             android:textColor="@color/colorPrimaryText"
             app:lineHeight="20dp" />
+        <ImageButton
+            android:id="@+id/TG"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/allbtns"
+            app:srcCompat="@drawable/ic_telegram"/>
     </LinearLayout>
 
     <LinearLayout

@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
             while (cursor.moveToNext()){
                 String album = cursor.getString(0);
                 String title = cursor.getString(1);
-                String duration = cursor.getString(2);
+                int duration = cursor.getInt(2);
                 String path = cursor.getString(3);
                 String artist = cursor.getString(4);
 

@@ -27,7 +27,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.util.ArrayList;
 
-import static com.example.musicplayer.MainActivity.CHANNEL_1_ID;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder> {
 

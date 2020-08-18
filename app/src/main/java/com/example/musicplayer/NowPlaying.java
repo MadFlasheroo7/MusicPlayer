@@ -181,7 +181,6 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
                 .setPriority(androidx.core.app.NotificationCompat.PRIORITY_HIGH)
                 .build();
         notificationManager.notify(1, notification);
-
     }
 
     @Override

@@ -4,11 +4,11 @@ public class MusicFiles {
     private String path;
     private String title;
     private String artist;
-    private String album;
+    private int album;
     private String duration;
     private String id;
 
-    public MusicFiles(String path, String title, String artist, String album, String duration, String id) {
+    public MusicFiles(String path, String title, String artist, int album, String duration, String id) {
         this.path = path;
         this.title = title;
         this.artist = artist;
@@ -44,11 +44,11 @@ public class MusicFiles {
         this.artist = artist;
     }
 
-    public String getAlbum() {
+    public int getAlbum() {
         return album;
     }
 
-    public void setAlbum(String album) {
+    public void setAlbum(int album) {
         this.album = album;
     }
 
