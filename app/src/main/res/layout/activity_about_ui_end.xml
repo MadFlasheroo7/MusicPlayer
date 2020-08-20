@@ -87,6 +87,13 @@
             android:background="@drawable/allbtns"
             app:srcCompat="@drawable/ic_reddit"
             tools:ignore="ContentDescription" />
+        <ImageButton
+            android:id="@+id/git"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/allbtns"
+            app:srcCompat="@drawable/ic_github"
+            tools:ignore="ContentDescription" />
         </LinearLayout>
     </LinearLayout>
 

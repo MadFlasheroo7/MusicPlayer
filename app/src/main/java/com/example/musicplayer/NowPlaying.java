@@ -5,9 +5,12 @@
  */
 package com.example.musicplayer;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.media.app.NotificationCompat;
+import androidx.palette.graphics.Palette;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -17,6 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.icu.text.CaseMap;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -169,7 +173,7 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
         Notification notification = new androidx.core.app.NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_notification_icon)
                 .setLargeIcon(pic)
-//                .setContentTitle(title)
+//                .setContentTitle()
                 .addAction(R.drawable.ic_repeat,"Repeat",null)
                 .addAction(R.drawable.ic_notification_prev,"previous",null)
                 .addAction(R.drawable.ic_play,"play",null)
@@ -421,13 +425,10 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
         retriever.setDataSource(uri.toString());
         byte[] albumArt = retriever.getEmbeddedPicture();
         if (albumArt != null){
-
-//            bitmap = BitmapFactory.decodeByteArray(albumArt, 0, albumArt.length);
             Glide.with(this)
                     .asBitmap()
                     .load(albumArt)
                     .into(cover_art);
-
             AlbumartAnimation(this,cover_art, null);
         }else
             {
@@ -458,22 +459,22 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
             @Override
             public void onAnimationEnd(Animation animation) {
 //                Glide.with(context).load(bitmap).into(imageView);
-                anim_IN.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
+//                anim_IN.setAnimationListener(new Animation.AnimationListener() {
+//                    @Override
+//                    public void onAnimationStart(Animation animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationEnd(Animation animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationRepeat(Animation animation) {
+//
+//                    }
+//                });
                 imageView.startAnimation(anim_IN);
             }
 

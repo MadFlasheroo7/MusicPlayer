@@ -1,6 +1,8 @@
 package com.example.musicplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,7 +12,7 @@ import android.widget.ImageButton;
 
 public class About_activity extends AppCompatActivity {
 
-    ImageButton telegram,instagram,twitter,reddit;
+    ImageButton telegram,instagram,twitter,reddit,github;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,7 @@ public class About_activity extends AppCompatActivity {
         instagram = findViewById(R.id.insta);
         twitter = findViewById(R.id.tweet);
         reddit = findViewById(R.id.reddit);
+        github = findViewById(R.id.git);
 
         telegram.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +51,14 @@ public class About_activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.reddit.com/user/Mad_flasher"));
+                startActivity(intent);
+            }
+        });
+
+        github.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("https://github.com/MadFlasheroo7"));
                 startActivity(intent);
             }
         });

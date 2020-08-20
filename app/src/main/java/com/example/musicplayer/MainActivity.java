@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         runTimePermission();
         CreateNotificationChannel();
 
-        //Making Navigation drawer
+
         drawerLayout = findViewById(R.id.drawerLayout);
 
         //Giving on click to our hamburger icon
@@ -89,62 +89,14 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+        //Making Navigation drawer
         NavigationView navigationView = findViewById(R.id.navigationView);
 
         NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome,
                 R.id.menuNowPlaying,
                 R.id.menuAbout,R.id.menuSettings).build();
-        
-//        NavigationUI.setupActionBarWithNavController(this,navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        /*
-            After adding these codes it got fucked up
-         */
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId())
-//                {
-//                    case R.id.menuTG:
-//                        Intent intent = new Intent(Intent.ACTION_VIEW);
-//                        intent.setData(Uri.parse("https://t.me/mad_flasher_oo7"));
-//                        startActivity(intent);
-//                        break;
-//
-//                    case R.id.menuTwitter:
-//                        Intent intent1 = new Intent(Intent.ACTION_VIEW);
-//                        intent1.setData(Uri.parse("https://twitter.com/jayesh_seth_"));
-//                        startActivity(intent1);
-//                        break;
-//                    case R.id.menuInstagram:
-//                        Intent intent2 = new Intent((Intent.ACTION_VIEW));
-//                        intent2.setData(Uri.parse("https://www.instagram.com/iam_the_iron_man/"));
-//                        startActivity(intent2);
-//                        break;
-//                    case R.id.menuReddit:
-//                        Intent intent3 = new Intent((Intent.ACTION_VIEW));
-//                        intent3.setData(Uri.parse("https://www.reddit.com/user/Mad_flasher"));
-//                        startActivity(intent3);
-//                        break;
-//                    case R.id.menuAbout:
-//                        Intent intent4 = new Intent(getApplicationContext(),About_activity.class);
-//                        startActivity(intent4);
-//                        break;
-//                    case R.id.menuHome:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.navHostFragment,new Home()).commit();
-////                        Intent intent5 = new Intent(getApplicationContext(),AllSongs.class);
-////                        startActivity(intent5);
-//                        break;
-////                    case R.id.menuHome:
-////                        Navigation.findNavController((Activity) getApplicationContext(),R.id.navHostFragment).navigate(R.id.menuHome);
-////                        break;
-//                }
-////                drawerLayout.closeDrawer(GravityCompat.START);
-//                return false;
-//            }
-//        });
 
 //        final TextView textTitle = findViewById(R.id.textTitle);
 //
@@ -182,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel notificationChannel = new NotificationChannel(
-                    CHANNEL_1_ID,"Music Player's notification", NotificationManager.IMPORTANCE_HIGH);
+                    CHANNEL_1_ID,"Music Player's notification", NotificationManager.IMPORTANCE_LOW);
             notificationChannel.setDescription("This is my first notification");
 //            NotificationChannel notificationChannel2 = new NotificationChannel(
 //                    CHANNEL_2_ID,"Music Player's notification", NotificationManager.IMPORTANCE_LOW);
