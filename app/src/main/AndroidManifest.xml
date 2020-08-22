@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="q">
-        <activity android:name=".Settings_Activity"></activity>
+        <activity android:name=".Album_details"></activity>
+        <activity android:name=".Settings_Activity" />
         <activity android:name=".About_activity" />
         <activity android:name=".Splash_Screen">
             <intent-filter>

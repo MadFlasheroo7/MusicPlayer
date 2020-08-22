@@ -5,17 +5,16 @@
  */
 package com.example.musicplayer;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.media.app.NotificationCompat;
-import androidx.palette.graphics.Palette;
+import androidx.core.view.GravityCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.icu.text.CaseMap;
@@ -38,15 +37,19 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 
 import static com.example.musicplayer.MainActivity.CHANNEL_1_ID;
+import static com.example.musicplayer.MainActivity.drawerLayout;
 import static com.example.musicplayer.MainActivity.musicFiles;
 import static com.example.musicplayer.MainActivity.repeatBoolean;
 import static com.example.musicplayer.MainActivity.shuffleBoolean;
 import static com.example.musicplayer.MusicAdapter.mFiles;
+import static com.example.musicplayer.albumDetailsAdapter.albumFlies;
 
 public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
 
@@ -169,11 +172,11 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
         Bitmap pic = BitmapFactory.decodeResource(getResources(),R.drawable.box2);
         MediaSessionCompat mediaSessionCompat = new MediaSessionCompat(this,"tsg");
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-//        String title = listSongs.get(position).getTitle();
+        String title = listSongs.get(position).getTitle();
         Notification notification = new androidx.core.app.NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_notification_icon)
                 .setLargeIcon(pic)
-//                .setContentTitle()
+                .setContentTitle(title)
                 .addAction(R.drawable.ic_repeat,"Repeat",null)
                 .addAction(R.drawable.ic_notification_prev,"previous",null)
                 .addAction(R.drawable.ic_play,"play",null)
@@ -380,7 +383,13 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
     private void getIntentMethod()
     {
         position = getIntent().getIntExtra("Position",0);
-        listSongs = mFiles;
+        String sender = getIntent().getStringExtra("sender");
+        if (sender != null && sender.equals("albumDetails")){
+            listSongs = albumFlies;
+        }else{
+            listSongs = mFiles;
+        }
+
         if (listSongs != null){
             playPauseBtn.setImageResource(R.drawable.ic_pause_btn);
             uri = Uri.parse(listSongs.get(position).getPath());

@@ -36,12 +36,12 @@ public class Notification_services {
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
             MediaSessionCompat mediaSessionCompat = new MediaSessionCompat(context,"tag");
 
-            Bitmap albumArt = BitmapFactory.decodeResource(context.getResources(),musicFiles.getAlbum());
+//            Bitmap albumArt = BitmapFactory.decodeResource(context.getResources(),musicFiles.getAlbum());
             notification = new Notification.Builder(context,channelID)
                     .setSmallIcon(R.drawable.ic_notification_icon)
                     .setContentTitle(musicFiles.getTitle())
                     .setContentText(musicFiles.getArtist())
-                    .setLargeIcon(albumArt)
+//                    .setLargeIcon(albumArt)
                     .setOnlyAlertOnce(true)
                     .setShowWhen(false)
 //                    .setPriority(No.PRIORITY_LOW)

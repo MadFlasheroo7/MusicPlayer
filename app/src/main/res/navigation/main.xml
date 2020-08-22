@@ -30,6 +30,16 @@
         android:name="com.example.musicplayer.Settings_Activity"
         android:label="activity_settings"
         tools:layout="@layout/activity_settings" />
+    <activity
+        android:id="@+id/album_details"
+        android:name="com.example.musicplayer.Album_details"
+        android:label="activity_album_details"
+        tools:layout="@layout/activity_album_details" />
+    <fragment
+        android:id="@+id/menuAlbum"
+        android:name="com.example.musicplayer.AlbumFragment"
+        android:label="fragment_album"
+        tools:layout="@layout/fragment_album" />
 
 
 </navigation>

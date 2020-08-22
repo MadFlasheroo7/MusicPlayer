@@ -57,7 +57,6 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
-import static com.example.musicplayer.MusicAdapter.mContext;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<MusicFiles> musicFiles;
     static ArrayAdapter<MusicAdapter> musicAdapter;
     SearchView searchView;
-    DrawerLayout drawerLayout;
+    static DrawerLayout drawerLayout;
     public static final int REQUEST_CODE = 1;
     static boolean shuffleBoolean = false, repeatBoolean = false;
     public static final String CHANNEL_1_ID = "channel1";
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.menuHome,
                 R.id.menuNowPlaying,
-                R.id.menuAbout,R.id.menuSettings).build();
+                R.id.menuAbout,R.id.menuSettings,R.id.menuAlbum).build();
         NavigationUI.setupWithNavController(navigationView, navController);
 
 //        final TextView textTitle = findViewById(R.id.textTitle);
@@ -158,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String[] proj = {
                 MediaStore.Audio.Media.ALBUM,
+//                MediaStore.Audio.Media.ALBUM_ID,
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DURATION,
                 MediaStore.Audio.Media.DATA, // for Path
@@ -171,14 +171,14 @@ public class MainActivity extends AppCompatActivity {
             while (cursor.moveToNext()){
                 String album = cursor.getString(0);
                 String title = cursor.getString(1);
-                int duration = cursor.getInt(2);
+                String duration = cursor.getString(2);
                 String path = cursor.getString(3);
                 String artist = cursor.getString(4);
-
+//                String albumID = cursor.getString(6);
                 String id = cursor.getString(5);
                 MusicFiles musicFiles = new MusicFiles(path,title,artist,duration,album,id);
-                Log.e("Path : " + path,"Album : " + album);
-                Log.e("Title : " + title,"Artist : " + artist);
+//                Log.e("Path : " + path,"Album : " + album);
+//                Log.e("Title : " + title,"Artist : " + artist);
                 tempAudioList.add(musicFiles);
             }
             cursor.close();

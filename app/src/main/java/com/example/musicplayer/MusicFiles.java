@@ -2,23 +2,48 @@ package com.example.musicplayer;
 
 public class MusicFiles {
     private String path;
+    private String album;
     private String title;
     private String artist;
-    private int album;
+//    private String albumID;
     private String duration;
     private String id;
 
-    public MusicFiles(String path, String title, String artist, int album, String duration, String id) {
+    public MusicFiles(String path, String title, String artist, String album, String duration, String id) {
         this.path = path;
         this.title = title;
         this.artist = artist;
         this.album = album;
+//        this.albumArtist = albumArtist;
         this.duration = duration;
         this.id = id;
     }
 
+//    public String getAlbumID() {
+//        return albumID;
+//    }
+//
+//    public void setAlbumID(String albumID) {
+//        this.albumID = albumID;
+//    }
+//    public String getAlbumArtist() {
+//        return albumArtist;
+//    }
+//
+//    public void setAlbumArtist(String albumArtist) {
+//        this.albumArtist = albumArtist;
+//    }
+
     public MusicFiles() {
     }
+
+//    public String getAlbumArtist() {
+//        return albumArtist;
+//    }
+//
+//    public void setAlbumArtist(String albumArtist) {
+//        this.albumArtist = albumArtist;
+//    }
 
     public String getPath() {
         return path;
@@ -44,11 +69,11 @@ public class MusicFiles {
         this.artist = artist;
     }
 
-    public int getAlbum() {
+    public String getAlbum() {
         return album;
     }
 
-    public void setAlbum(int album) {
+    public void setAlbum(String album) {
         this.album = album;
     }
 

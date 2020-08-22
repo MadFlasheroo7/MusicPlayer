@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder> {
 
-    static Context mContext;
+    Context mContext;
     static ArrayList<MusicFiles> mFiles;
     private NotificationManager notificationManager;
 
@@ -55,9 +55,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         final byte[] image = albumArt(mFiles.get(position).getPath());
         if (image != null)
         {
-            Glide.with(mContext).asBitmap().load(image).into(holder.album_Art);
+            Glide.with(mContext)
+                    .asBitmap()
+                    .load(image)
+                    .into(holder.album_Art);
         }else {
-            Glide.with(mContext).load(R.drawable.ic_album).into(holder.album_Art);
+            Glide.with(mContext)
+                    .load(R.drawable.ic_album)
+                    .into(holder.album_Art);
         }
         //if any song name is clicked it will play it in now playing activity
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +84,9 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        switch (menuItem.getItemId()){
-                            case R.id.delete:
-//                                Toast.makeText(mContext,"Delete clicked",Toast.LENGTH_SHORT).show();
-                                deleteFile(position,view);
-                                break;
+                        if (menuItem.getItemId() == R.id.delete) {
+                            // Toast.makeText(mContext,"Delete clicked",Toast.LENGTH_SHORT).show();
+                            deleteFile(position, view);
                         }
                         return true;
                     }
