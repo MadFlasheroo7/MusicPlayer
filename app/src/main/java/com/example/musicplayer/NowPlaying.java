@@ -5,21 +5,11 @@
  */
 package com.example.musicplayer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import android.app.Notification;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.text.CaseMap;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -27,7 +17,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -36,16 +25,16 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+
 import com.bumptech.glide.Glide;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-
 import static com.example.musicplayer.MainActivity.CHANNEL_1_ID;
-import static com.example.musicplayer.MainActivity.drawerLayout;
-import static com.example.musicplayer.MainActivity.musicFiles;
 import static com.example.musicplayer.MainActivity.repeatBoolean;
 import static com.example.musicplayer.MainActivity.shuffleBoolean;
 import static com.example.musicplayer.MusicAdapter.mFiles;
@@ -65,7 +54,7 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
     AudioManager audioManager;
     private Handler handler = new Handler();
     int position;
-    static Context context;
+//    static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -438,24 +427,18 @@ public class NowPlaying extends AppCompatActivity implements MediaPlayer.OnCompl
                     .asBitmap()
                     .load(albumArt)
                     .into(cover_art);
-            AlbumartAnimation(this,cover_art, null);
         }else
             {
             Glide.with(this)
                     .asDrawable()
                     .load(R.drawable.ic_album)
                     .into(cover_art);
-//            Glide.with(this)
-//                    .asGif()
-//                    .load(R.drawable.cat)
-//                    .into(cover_art);
-            AlbumartAnimation(this,cover_art, null);
-        }
-//        AlbumartAnimation(this,cover_art, null);
+            }
+        AlbumartAnimation(this,cover_art);
     }
 
     //Album art animation
-    private void AlbumartAnimation(final Context context, final ImageView imageView, final Bitmap bitmap)
+    private void AlbumartAnimation(final Context context, final ImageView imageView)
     {
         final Animation anim_OUT = AnimationUtils.loadAnimation(context,android.R.anim.slide_out_right);
         final Animation anim_IN = AnimationUtils.loadAnimation(context,android.R.anim.slide_in_left);

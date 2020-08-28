@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreferenceCompat android:title="Dark Mode"
+        android:key="darkMode"
+        android:summary="App Theme" />
+    <SwitchPreferenceCompat
+        android:title="Amoled Black Mode"
+        android:dependency="darkMode"
+        android:summary="Beta Feature"
+        android:summaryOn="Feel the blackness"
+        android:summaryOff="its beta for now"/>
+    <Preference android:title="Customize App Theme"
+        android:summary="Customize more">
+        <intent android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.musicplayer"
+            android:targetClass="com.example.musicplayer.Customize_More"/>
+    </Preference>
+</PreferenceScreen>

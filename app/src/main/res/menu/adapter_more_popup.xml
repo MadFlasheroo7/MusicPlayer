@@ -6,4 +6,10 @@
         android:title="Delete"
         android:id="@+id/delete"
         android:icon="@drawable/ic_round_delete"/>
+    <item
+        android:title="Rename"
+        android:id="@+id/rename" />
+    <item
+        android:title="Share"
+        android:id="@+id/share"/>
 </menu>

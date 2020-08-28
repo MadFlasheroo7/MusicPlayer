@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_about_ui_scene"
     app:showPaths="false"
-    android:id="@+id/LayourEnd"
+    android:id="@+id/LayoutEnd"
     tools:context=".About_activity">
 
     <ImageView
@@ -20,7 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/me" />
+        app:srcCompat="@drawable/me"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

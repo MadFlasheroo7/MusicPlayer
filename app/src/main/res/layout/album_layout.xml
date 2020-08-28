@@ -24,7 +24,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
-            app:riv_corner_radius="30dp"
+            app:riv_corner_radius="25dp"
             android:elevation="30dp"
             android:src="@drawable/ic_album"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"

@@ -1,5 +1,6 @@
 package com.example.musicplayer;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import static com.example.musicplayer.MainActivity.musicFiles;
 public class AllSongs extends Fragment {
 
     RecyclerView recyclerView;
+    @SuppressLint("StaticFieldLeak")
     static MusicAdapter musicAdapter;
 
     @Override

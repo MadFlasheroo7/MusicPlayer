@@ -19,31 +19,8 @@ public class MusicFiles {
         this.id = id;
     }
 
-//    public String getAlbumID() {
-//        return albumID;
-//    }
-//
-//    public void setAlbumID(String albumID) {
-//        this.albumID = albumID;
-//    }
-//    public String getAlbumArtist() {
-//        return albumArtist;
-//    }
-//
-//    public void setAlbumArtist(String albumArtist) {
-//        this.albumArtist = albumArtist;
-//    }
-
     public MusicFiles() {
     }
-
-//    public String getAlbumArtist() {
-//        return albumArtist;
-//    }
-//
-//    public void setAlbumArtist(String albumArtist) {
-//        this.albumArtist = albumArtist;
-//    }
 
     public String getPath() {
         return path;

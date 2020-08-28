@@ -22,7 +22,7 @@ public class Album_Adapter extends RecyclerView.Adapter<Album_Adapter.MyHolder> 
 
     public Album_Adapter(Context mContext, ArrayList<MusicFiles> albumFlies) {
         this.mContext = mContext;
-        this.albumFlies = albumFlies;
+        Album_Adapter.albumFlies = albumFlies;
     }
 
     @NonNull
@@ -62,7 +62,7 @@ public class Album_Adapter extends RecyclerView.Adapter<Album_Adapter.MyHolder> 
         return albumFlies.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder{
+    public static class MyHolder extends RecyclerView.ViewHolder{
         ImageView albumImage;
         TextView albumName;
         public MyHolder(@NonNull View itemView) {

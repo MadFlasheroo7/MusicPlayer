@@ -1,7 +1,5 @@
 package com.example.musicplayer;
 
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -15,10 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -32,11 +28,11 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     Context mContext;
     static ArrayList<MusicFiles> mFiles;
-    private NotificationManager notificationManager;
+//    private NotificationManager notificationManager;
 
     public MusicAdapter(Context mContext,ArrayList<MusicFiles> mFiles){
 
-        this.mFiles = mFiles;
+        MusicAdapter.mFiles = mFiles;
         this.mContext = mContext;
     }
 

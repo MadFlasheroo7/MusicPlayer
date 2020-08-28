@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference android:title="User Profile"
+        android:summary="Setup your profile">
+        <intent android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.musicplayer"
+            android:targetClass="com.example.musicplayer.Profile_Setup"/>
+    </Preference>
+</PreferenceScreen>
