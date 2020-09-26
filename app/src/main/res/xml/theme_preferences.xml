@@ -5,6 +5,7 @@
         android:summary="App Theme" />
     <SwitchPreferenceCompat
         android:title="Amoled Black Mode"
+        android:key="blackMode"
         android:dependency="darkMode"
         android:summary="Beta Feature"
         android:summaryOn="Feel the blackness"

@@ -48,6 +48,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -60,7 +62,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
+     AppBarConfiguration mAppBarConfiguration;
     static ArrayList<MusicFiles> musicFiles;
     static ArrayAdapter<MusicAdapter> musicAdapter;
     SearchView searchView;
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         runTimePermission();
         CreateNotificationChannel();
+
+        musicFiles = getAudio(this);
 
 
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -105,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
 //                textTitle.setText(destination.getLabel());
 //            }
 //        });
-
         searchView = findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -174,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
                 String duration = cursor.getString(2);
                 String path = cursor.getString(3);
                 String artist = cursor.getString(4);
-//                String albumID = cursor.getString(6);
                 String id = cursor.getString(5);
                 MusicFiles musicFiles = new MusicFiles(path,title,artist,duration,album,id);
 //                Log.e("Path : " + path,"Album : " + album);
@@ -195,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(this,"!! PerMission Granted !!",Toast.LENGTH_LONG).show();
 
             // if the permission is granted it will show the audio files
-            musicFiles = getAudio(this);
+//            musicFiles = getAudio(this);
         }
     }
 

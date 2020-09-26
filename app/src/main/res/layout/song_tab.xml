@@ -20,8 +20,8 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/music_art"
             android:layout_width="60dp"
-            android:layout_height="0dp"
-            android:padding="5dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_album"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
